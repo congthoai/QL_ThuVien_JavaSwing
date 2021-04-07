@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" language="groovy" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="0b8946a9-9ca3-4de2-8d05-d5e79b5cf937">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="thang" class="java.lang.Integer">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="nam" class="java.lang.Integer">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="thoiGian" class="java.lang.String"/>
+	<queryString>
+		<![CDATA[SELECT ds.MaDS, ds.TenDS, COUNT(*) AS SoLuongMuon FROM dbo.QuaTrinh_Muon qt JOIN dbo.CuonSach cs ON cs.maCS = qt.maCS JOIN dbo.DauSach ds ON ds.maDS = cs.maDS
+			WHERE  year(qt.ngayMuon)=$P{nam} AND month(qt.ngayMuon)=$P{thang}
+			GROUP BY ds.maDS, ds.tenDS]]>
+	</queryString>
+	<field name="MaDS" class="java.lang.String"/>
+	<field name="TenDS" class="java.lang.String"/>
+	<field name="SoLuongMuon" class="java.lang.Integer"/>
+	<background>
+		<band/>
+	</background>
+	<title>
+		<band height="72">
+			<frame>
+				<reportElement mode="Opaque" x="-20" y="-20" width="595" height="92" backcolor="#006699" uuid="a9d3e2ae-301b-4bc8-b69f-390f7dfa61fd"/>
+				<staticText>
+					<reportElement x="30" y="10" width="555" height="43" forecolor="#FFFFFF" uuid="99b45377-bc30-4391-9f40-07d6318ad986"/>
+					<textElement>
+						<font size="31" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Thống kê lượt mượn theo đầu sách]]></text>
+				</staticText>
+				<textField>
+					<reportElement x="239" y="64" width="155" height="28" forecolor="#FFFF00" uuid="7680bcb3-5f6e-42ff-91f6-65e6283f478a"/>
+					<textElement>
+						<font size="18"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$P{thoiGian}]]></textFieldExpression>
+				</textField>
+			</frame>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="13"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="22">
+			<line>
+				<reportElement x="-20" y="20" width="595" height="1" forecolor="#666666" uuid="efc9b55f-610e-4297-8bc6-ba3ffdcdd053"/>
+			</line>
+			<staticText>
+				<reportElement mode="Opaque" x="0" y="0" width="116" height="20" forecolor="#006699" backcolor="#E6E6E6" uuid="1c70e3f9-6129-4683-83b1-9e7e13ccc980"/>
+				<textElement textAlignment="Center">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Mã đầu sách]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="142" y="1" width="256" height="20" forecolor="#006699" backcolor="#E6E6E6" uuid="ae6d96f0-b959-41f5-8ebb-12405877fa78"/>
+				<textElement textAlignment="Center">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Tên đầu sách]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="425" y="0" width="130" height="20" forecolor="#006699" backcolor="#E6E6E6" uuid="e29e633c-5189-4087-81b1-1267df96340b"/>
+				<textElement textAlignment="Center">
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Số lượng mượn]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="20">
+			<line>
+				<reportElement positionType="FixRelativeToBottom" x="0" y="19" width="555" height="1" uuid="41f70606-543d-4b8f-801c-883edb812916"/>
+			</line>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="21" y="0" width="79" height="20" uuid="7d8c378b-f454-4bb4-9136-71b7ed156430"/>
+				<textElement>
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{MaDS}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="142" y="0" width="273" height="20" uuid="9fff23eb-0182-4e99-a6dc-576fb3636ef6"/>
+				<textElement>
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{TenDS}]]></textFieldExpression>
+			</textField>
+			<textField isStretchWithOverflow="true">
+				<reportElement x="470" y="0" width="65" height="20" uuid="4e7a700d-a117-495d-8093-bd125b60ecab"/>
+				<textElement>
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{SoLuongMuon}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band/>
+	</columnFooter>
+	<pageFooter>
+		<band height="17">
+			<textField>
+				<reportElement mode="Opaque" x="0" y="4" width="515" height="13" backcolor="#E6E6E6" uuid="ecaa4afa-c220-40f4-93b1-f347e3e15052"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement mode="Opaque" x="515" y="4" width="40" height="13" backcolor="#E6E6E6" uuid="b821de64-5c4f-45b9-abe4-2db1eb962d84"/>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<textField pattern="EEEEE dd MMMMM yyyy">
+				<reportElement x="0" y="4" width="100" height="13" uuid="6edb2990-1238-41e3-ab7e-db8ad12367f3"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band/>
+	</summary>
+</jasperReport>
